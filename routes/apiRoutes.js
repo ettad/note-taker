@@ -4,7 +4,7 @@ let db = require('../db/db.json');
 
 
 app.get('/notes', (req, res) => {
-  db = JSON.parse(fs.readFileSync('../db/db.json', 'utf-8'))
+  db = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'))
 
   res.json(db);
 
@@ -18,7 +18,7 @@ app.post('/notes', (req, res) => {
   }
 
   db.push(newNote);
-  fs.writeFileSync('../db/db.json', JSON.stringify(db), (err, res) => {
+  fs.writeFileSync('./db/db.json', JSON.stringify(db), (err, res) => {
     if(err) throw err;
   });
 
@@ -27,7 +27,7 @@ app.post('/notes', (req, res) => {
 })
 
 app.delete('/notes/:id', (req, res) => {
-  let db = require('../db/db.json');
+  let db = require('./db/db.json');
 
   let notesToKeep = [];
 
@@ -43,7 +43,7 @@ app.delete('/notes/:id', (req, res) => {
   console.log(notesToKeep);
 
   db = notesToKeep;
-  fs.writeFileSync('../db/db.json', JSON.stringify(db), (err, res) => {
+  fs.writeFileSync('./db/db.json', JSON.stringify(db), (err, res) => {
     if(err) throw err;
   });
 
